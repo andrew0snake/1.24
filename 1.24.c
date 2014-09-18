@@ -4,6 +4,7 @@
 int gett(char text[10000]);
 void form(int len,char text[10000]);
 void decomment(int len,char text[10000]);
+void syntax_check(int len, char text[10000]);
 
 void main ()
 {
@@ -14,10 +15,11 @@ void main ()
     printf("Enter text, what has to be formatted.\n");
 
     while( (l=gett(text) )>0 ){
-	printf("---------------Non formatted text seems so:--------------------|\n%s\n---------------------------------------------------------------|\n",text);
+//	printf("---------------Non formatted text seems so:--------------------|\n%s\n---------------------------------------------------------------|\n",text);
 //	form(l,text);
-	decomment(l,text);
-	printf("---------------Same text after formatting seems so:------------|\n%s\n---------------------------------------------------------------|\n",text);
+//	decomment(l,text);
+	syntax_check(l,text);
+//	printf("---------------Same text after formatting seems so:------------|\n%s\n---------------------------------------------------------------|\n",text);
 	
     }
     printf("normal end of program\n");
@@ -276,4 +278,61 @@ void decomment(int len,char text[10000])
 	}*/
 	
     };//end of cycle
+}
+
+
+void syntax_check(int len,char text[10000])
+{
+    int i,j,k,l,m,c1,c2,c3,c4;
+
+//check for brackets
+    //c1-counter for ( and ) - brackets
+    //c2-counter for [ and ] - brackets
+    //c3-counter for { and } - brackets
+    c1=c2=c3=0;
+    
+    for(i=0;i<=len;++i){
+	if(text[i]=='(')
+	    ++c1;
+	if(text[i]==')')
+	    --c1;
+    }
+
+    for(i=0;i<=len;++i){
+	if(text[i]=='[')
+	    ++c2;
+	if(text[i]==']')
+	    --c2;
+    }
+
+
+    for(i=0;i<=len;++i){
+	if(text[i]=='{')
+	    ++c3;
+	if(text[i]=='}')
+	    --c3;
+    }
+
+    
+    if(c1!=0)
+	printf("Round brackets are not ballanced.c1=%d\n",c1);
+    else 
+	printf("Round brackets are ballanced.c1=%d\n",c1);
+
+    if(c2!=0)
+	printf("Square brackets are not ballanced.c2=%d\n",c2);
+    else 
+	printf("Square brackets are ballanced.c2=%d\n",c2);
+
+    if(c3!=0)
+	printf("Braces are not ballanced.c3=%d\n",c3);
+    else 
+	printf("Braces are ballanced.c3=%d\n",c3);
+
+//check for all kinds of brackets is finished
+
+//check for commas
+
+
+
 }
