@@ -283,13 +283,15 @@ void decomment(int len,char text[10000])
 
 void syntax_check(int len,char text[10000])
 {
-    int i,j,k,l,m,c1,c2,c3,c4;
+    int i,j,k,l,m,c1,c2,c3,c4,ind,sum;
 
 //check for brackets
     //c1-counter for ( and ) - brackets
     //c2-counter for [ and ] - brackets
     //c3-counter for { and } - brackets
-    c1=c2=c3=0;
+    //c4-counter for " and ' - commas
+    //ind-counter of evenness
+    c1=c2=c3=ind=0;
     
     for(i=0;i<=len;++i){
 	if(text[i]=='(')
@@ -332,7 +334,13 @@ void syntax_check(int len,char text[10000])
 //check for all kinds of brackets is finished
 
 //check for commas
-
-
-
+    ind=1;
+    sum=0;
+    for(i=1;i<=len;++i){
+	if( (text[i]=='"') && (text[i-1]!=) ){
+	    sum=sum+ind;
+	    ind=ind*(-1);
+	}
+    }
+    printf("In the end sum=%d\n",sum);
 }
