@@ -18,6 +18,7 @@ void main ()
 //	printf("---------------Non formatted text seems so:--------------------|\n%s\n---------------------------------------------------------------|\n",text);
 //	form(l,text);
 //	decomment(l,text);
+	printf("\nThe result of check:\n");
 	syntax_check(l,text);
 //	printf("---------------Same text after formatting seems so:------------|\n%s\n---------------------------------------------------------------|\n",text);
 	
@@ -283,7 +284,7 @@ void decomment(int len,char text[10000])
 
 void syntax_check(int len,char text[10000])
 {
-    int i,j,k,l,m,c1,c2,c3,c4,ind,sum;
+    int i,j,k,l,m,c1,c2,c3,c4,com1_1,com1_2,ind,sum;
 
 //check for brackets
     //c1-counter for ( and ) - brackets
@@ -291,7 +292,7 @@ void syntax_check(int len,char text[10000])
     //c3-counter for { and } - brackets
     //c4-counter for " and ' - commas
     //ind-counter of evenness
-    c1=c2=c3=ind=0;
+    c1=c2=c3=ind=com1_1=com1_2=0;
     
     for(i=0;i<=len;++i){
 	if(text[i]=='(')
@@ -322,12 +323,12 @@ void syntax_check(int len,char text[10000])
 	printf("Round brackets are ballanced.c1=%d\n",c1);
 
     if(c2!=0)
-	printf("Square brackets are not ballanced.c2=%d\n",c2);
+	printf("Square brackets are NOT ballanced.c2=%d\n",c2);
     else 
 	printf("Square brackets are ballanced.c2=%d\n",c2);
 
     if(c3!=0)
-	printf("Braces are not ballanced.c3=%d\n",c3);
+	printf("Braces are NOT ballanced.c3=%d\n",c3);
     else 
 	printf("Braces are ballanced.c3=%d\n",c3);
 
@@ -337,10 +338,60 @@ void syntax_check(int len,char text[10000])
     ind=1;
     sum=0;
     for(i=1;i<=len;++i){
-	if( (text[i]=='"') && (text[i-1]!=) ){
+	if( (text[i]=='"') && (text[i-1]!='\\') ){
 	    sum=sum+ind;
 	    ind=ind*(-1);
 	}
     }
-    printf("In the end sum=%d\n",sum);
+    if (sum==0)
+        printf("Commas are ballanced. Sum=%d\n",sum);
+    else
+	printf("Commas are NOT ballanced. Sum=%d\n",sum);
+
+//check for commas
+
+//check for quotes
+    ind=1;
+    sum=0;
+    for(i=1;i<=len;++i){
+	if( (text[i]=='\'') && (text[i-1]!='\\') ){
+	    sum=sum+ind;
+	    ind=ind*(-1);
+	}
+    }
+    if (sum==0)
+        printf("Single quotes are ballanced. Sum=%d\n",sum);
+    else
+	printf("Single quotes are NOT ballanced. Sum=%d\n",sum);
+
+//check for quotes
+
+//check for comments /*
+    ind=1;
+    sum=0;
+    for(i=0;i<len;++i){
+	if( (text[i]=='/') && (text[i+1]='*') ){
+	    sum=sum+ind;
+	    ind=ind*(-1);
+	}
+    }
+    ind=1;
+    sum-0;
+    if (sum==0)
+	com1_1=1;
+    for(i=0;i<len;++i){
+	if( (text[i]=='*') && (text[i+1]='/') ){
+	    sum=sum+ind;
+	    ind=ind*(-1);
+	}
+    }
+    if (sum==0)
+	com1_2=1;
+    if( (com1_1==1) && (com1_2==1) )
+        printf("Comments of slash and star are ballanced. com1_1=%d;com1_2=%d\n",com1_1,com1_2);
+    else
+	printf("Comments of slash and star are NOT ballanced. com1_1=%d;com1_2=%d\n",com1_1,com1_2);
+
+//check for comments /*
+
 }
